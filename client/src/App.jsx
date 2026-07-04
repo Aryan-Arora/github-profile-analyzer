@@ -5,6 +5,7 @@ import SearchBar from "./components/SearchBar";
 import CompareBar from "./components/CompareBar";
 import CompareView from "./components/CompareView";
 import Skeleton from "./components/Skeleton";
+import Landing from "./components/Landing";
 import ProfileHeader from "./components/ProfileHeader";
 import PersonaCard from "./components/PersonaCard";
 import LanguageChart from "./components/LanguageChart";
@@ -190,6 +191,8 @@ export default function App() {
             {error}
           </div>
         )}
+
+        {showHero && !error && <Landing />}
 
         {loading && <Skeleton compare={mode === "compare"} />}
 
