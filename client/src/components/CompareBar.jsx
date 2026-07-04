@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { extractUsername } from "../lib/username";
 
 function UserInput({ value, onChange, placeholder }) {
   return (
@@ -24,16 +25,16 @@ export default function CompareBar({ onCompare, loading }) {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        if (ready) onCompare(userA.trim(), userB.trim());
+        if (ready) onCompare(extractUsername(userA), extractUsername(userB));
       }}
       className="w-full max-w-2xl mx-auto"
     >
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-        <UserInput value={userA} onChange={setUserA} placeholder="First username" />
+        <UserInput value={userA} onChange={setUserA} placeholder="First username or link" />
         <span className="self-center shrink-0 font-data text-[11px] font-semibold text-text-muted bg-surface border border-border rounded-md px-2.5 py-1.5 tracking-widest">
           VS
         </span>
-        <UserInput value={userB} onChange={setUserB} placeholder="Second username" />
+        <UserInput value={userB} onChange={setUserB} placeholder="Second username or link" />
       </div>
       <div className="mt-4 flex justify-center">
         <button

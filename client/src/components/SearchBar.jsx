@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { extractUsername } from "../lib/username";
 
 const POPULAR = ["torvalds", "gaearon", "sindresorhus"];
 
@@ -7,8 +8,8 @@ export default function SearchBar({ onSearch, loading, token, onTokenChange }) {
   const [showToken, setShowToken] = useState(false);
 
   function submit(name) {
-    const trimmed = (name ?? username).trim();
-    if (trimmed) onSearch(trimmed);
+    const cleaned = extractUsername(name ?? username);
+    if (cleaned) onSearch(cleaned);
   }
 
   return (
@@ -24,7 +25,7 @@ export default function SearchBar({ onSearch, loading, token, onTokenChange }) {
         <input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter GitHub username (e.g. torvalds)"
+          placeholder="Username or profile link (e.g. github.com/torvalds)"
           className="flex-1 bg-transparent outline-none text-sm py-1.5 placeholder:text-text-muted/70"
         />
         <button
