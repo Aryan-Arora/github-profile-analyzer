@@ -7,7 +7,7 @@ function levelFor(count, max) {
   return 1;
 }
 
-const LEVEL_COLORS = ["#161b22", "#1f4620", "#2f6d33", "#4bab4f", "#7cff81"];
+const LEVEL_COLORS = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
 
 function chunkIntoWeeks(days) {
   const weeks = [];
@@ -17,20 +17,55 @@ function chunkIntoWeeks(days) {
   return weeks;
 }
 
+function computeStreaks(days) {
+  let longest = 0;
+  let running = 0;
+  for (const day of days) {
+    if (day.contributionCount > 0) {
+      running += 1;
+      longest = Math.max(longest, running);
+    } else {
+      running = 0;
+    }
+  }
+
+  let current = 0;
+  for (let i = days.length - 1; i >= 0; i--) {
+    if (days[i].contributionCount > 0) current += 1;
+    else break;
+  }
+
+  return { current, longest };
+}
+
 export default function CommitHeatmap({ calendar, hourBuckets }) {
   const days = calendar.days ?? [];
   const max = Math.max(0, ...days.map((d) => d.contributionCount));
   const weeks = chunkIntoWeeks(days);
-
+  const { current, longest } = computeStreaks(days);
   const maxHour = Math.max(1, ...hourBuckets);
 
   return (
-    <div className="reveal rounded-2xl bg-panel border border-white/10 p-6">
-      <div className="flex items-baseline justify-between mb-4">
-        <h3 className="text-sm font-semibold text-white/80">Commit Activity</h3>
-        <span className="text-xs text-white/40">
-          {calendar.totalContributions} contributions in the last year
+    <div className="reveal rounded-lg bg-surface border border-border p-6">
+      <div className="flex items-baseline justify-between mb-1">
+        <h3 className="font-heading text-sm font-semibold text-text">Contribution Insights</h3>
+        <span className="font-data text-xs text-text-muted">
+          {calendar.totalContributions} contributions
         </span>
+      </div>
+
+      <div className="flex gap-8 mb-5 mt-3">
+        <div>
+          <p className="font-data text-xl font-semibold text-primary flex items-center gap-1">
+            <span className="material-symbols-outlined text-[18px]">local_fire_department</span>
+            {current}
+          </p>
+          <p className="text-[11px] uppercase tracking-wider text-text-muted mt-0.5">Current Streak</p>
+        </div>
+        <div>
+          <p className="font-data text-xl font-semibold text-text">{longest} days</p>
+          <p className="text-[11px] uppercase tracking-wider text-text-muted mt-0.5">Longest Streak</p>
+        </div>
       </div>
 
       <div className="overflow-x-auto">
@@ -51,18 +86,18 @@ export default function CommitHeatmap({ calendar, hourBuckets }) {
       </div>
 
       <div className="mt-6">
-        <p className="text-xs text-white/50 mb-2">Commits by hour of day</p>
+        <p className="text-[11px] uppercase tracking-wider text-text-muted mb-2">Commits by Hour of Day</p>
         <div className="flex items-end gap-[2px] h-16">
           {hourBuckets.map((count, hour) => (
             <div
               key={hour}
               title={`${hour}:00 — ${count} commits`}
-              className="flex-1 bg-accent/70 rounded-t-sm"
+              className="flex-1 bg-secondary/70 rounded-t-sm"
               style={{ height: `${Math.max(4, (count / maxHour) * 100)}%` }}
             />
           ))}
         </div>
-        <div className="flex justify-between text-[10px] text-white/30 mt-1">
+        <div className="flex justify-between text-[10px] font-data text-text-muted mt-1">
           <span>12am</span>
           <span>6am</span>
           <span>12pm</span>

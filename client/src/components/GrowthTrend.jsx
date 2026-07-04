@@ -1,35 +1,31 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 
 export default function GrowthTrend({ growthTrend }) {
-  const data = growthTrend.map((point) => ({
-    ...point,
-    year: new Date(point.date).getFullYear(),
-  }));
-
   return (
-    <div className="reveal rounded-2xl bg-panel border border-white/10 p-6">
-      <h3 className="text-sm font-semibold text-white/80 mb-4">Repo Growth Over Time</h3>
+    <div className="reveal rounded-lg bg-surface border border-border p-6">
+      <h3 className="font-heading text-sm font-semibold text-text mb-4">Repo Growth Over Time</h3>
       <div style={{ width: "100%", height: 220 }}>
         <ResponsiveContainer>
-          <LineChart data={data}>
-            <CartesianGrid stroke="rgba(255,255,255,0.06)" vertical={false} />
+          <LineChart data={growthTrend}>
+            <CartesianGrid stroke="#30363d" strokeOpacity={0.4} vertical={false} />
             <XAxis
               dataKey="date"
               tickFormatter={(d) => new Date(d).getFullYear()}
-              stroke="rgba(255,255,255,0.3)"
+              stroke="#8b949e"
               fontSize={11}
+              fontFamily="JetBrains Mono"
               minTickGap={40}
             />
-            <YAxis stroke="rgba(255,255,255,0.3)" fontSize={11} allowDecimals={false} />
+            <YAxis stroke="#8b949e" fontSize={11} fontFamily="JetBrains Mono" allowDecimals={false} />
             <Tooltip
               labelFormatter={(d) => new Date(d).toLocaleDateString()}
               formatter={(value, _name, props) => [value, props.payload.name]}
-              contentStyle={{ background: "#121722", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8 }}
+              contentStyle={{ background: "#161b22", border: "1px solid #30363d", borderRadius: 6, fontFamily: "JetBrains Mono", fontSize: 12 }}
             />
             <Line
               type="stepAfter"
               dataKey="cumulativeRepos"
-              stroke="#7c9eff"
+              stroke="#39d353"
               strokeWidth={2}
               dot={false}
             />

@@ -48,12 +48,30 @@ export default function App() {
   return (
     <div className="min-h-screen px-4 py-10 sm:py-16">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold">GitHub Profile Analyzer</h1>
-          <p className="text-white/50 text-sm mt-2">
-            See your coding identity: activity patterns, tech stack, repo health, and a shareable persona.
-          </p>
+        <div className="flex items-center justify-center gap-2 mb-10">
+          <span className="w-7 h-7 rounded-md bg-primary/10 border border-primary/30 flex items-center justify-center">
+            <span className="material-symbols-outlined text-primary text-[16px]">data_object</span>
+          </span>
+          <span className="font-heading font-semibold text-text tracking-tight">
+            GitHub Profile Analyzer
+          </span>
         </div>
+
+        {!data && !loading && (
+          <div className="text-center mb-8">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 text-primary text-[11px] font-data uppercase tracking-wider px-3 py-1 mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+              Real-time repository indexing
+            </span>
+            <h1 className="font-heading text-3xl sm:text-4xl font-bold text-text leading-tight">
+              Trace the impact of any <span className="text-primary">GitHub profile.</span>
+            </h1>
+            <p className="text-text-muted text-sm mt-3 max-w-md mx-auto">
+              High-density code metrics, contribution analysis, and a
+              developer persona tag — for any public GitHub username.
+            </p>
+          </div>
+        )}
 
         <SearchBar
           onSearch={handleSearch}
