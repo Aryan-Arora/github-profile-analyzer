@@ -28,14 +28,18 @@ npm run dev         # http://localhost:5173
 ## GitHub token
 
 GitHub's GraphQL API requires authentication for every request, even for
-public data — so a personal access token is required to run an analysis.
-Paste one into the "Add a GitHub token" field in the UI (it's kept in
-`localStorage` and sent only to your own server). No scopes are needed for
-public profiles — a classic PAT with no scopes checked, or a fine-grained
-token with read-only public repo access, both work.
+public data — that's a GitHub platform rule, not something this app adds.
 
-Alternatively, set `GITHUB_TOKEN` in `server/.env` to use one token
-server-side for all requests.
+For end users (e.g. HR/recruiters using this to look up candidates), this is
+handled entirely server-side: set `GITHUB_TOKEN` in `server/.env` to a
+personal access token (no scopes needed for public profiles — a classic PAT
+with nothing checked, or a fine-grained token with read-only public repo
+access, both work). Every analysis request then runs on that one shared
+token, and users never see or need a token of their own.
+
+The "Advanced: use your own GitHub token" field in the UI is optional — it
+lets a power user substitute their own token (kept in `localStorage`, sent
+only to this app's own server) if the shared server token is rate-limited.
 
 ## API
 

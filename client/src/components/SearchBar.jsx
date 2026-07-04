@@ -29,7 +29,7 @@ export default function SearchBar({ onSearch, loading, token, onTokenChange }) {
         />
         <button
           type="submit"
-          disabled={loading || !token}
+          disabled={loading}
           className="rounded-full bg-primary text-[#04260d] font-heading font-semibold px-5 py-2 text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-primary-dim transition-colors"
         >
           {loading ? "Analyzing…" : "Analyze"}
@@ -59,7 +59,7 @@ export default function SearchBar({ onSearch, loading, token, onTokenChange }) {
           onClick={() => setShowToken((v) => !v)}
           className="underline decoration-dotted hover:text-text transition-colors"
         >
-          {showToken ? "Hide token field" : "Add a GitHub token (required)"}
+          {showToken ? "Hide advanced settings" : "Advanced: use your own GitHub token"}
         </button>
       </div>
 
@@ -69,22 +69,17 @@ export default function SearchBar({ onSearch, loading, token, onTokenChange }) {
             type="password"
             value={token}
             onChange={(e) => onTokenChange(e.target.value)}
-            placeholder="ghp_… personal access token"
+            placeholder="ghp_… personal access token (optional)"
             className="w-full rounded-full bg-surface border border-border px-4 py-2.5 text-sm outline-none focus:border-primary/60 transition-colors"
           />
           <p className="mt-2 text-[11px] text-text-muted leading-relaxed">
-            GitHub's GraphQL API requires authentication even for public data.
-            Your token is only sent from your browser to your own server and is
-            never stored anywhere except your browser's local storage.
+            Analyses already run on this app's own server-side token — you
+            don't need one to use it. Add your own only if you're hitting
+            shared rate limits and want to use your personal quota instead.
+            It's sent only to this app's server, never stored anywhere but
+            your browser's local storage.
           </p>
         </div>
-      )}
-
-      {!token && (
-        <p className="mt-2 text-[11px] text-amber-400/80">
-          A personal access token (no scopes needed — a classic or fine-grained
-          token both work) is required to run an analysis.
-        </p>
       )}
     </form>
   );
