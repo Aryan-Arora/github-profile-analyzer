@@ -14,7 +14,7 @@ export default function ProfileHeader({ profile }) {
   });
 
   return (
-    <div className="reveal rounded-lg bg-surface border border-border p-6 flex flex-col sm:flex-row gap-5 items-start sm:items-center">
+    <div className="reveal card p-6 flex flex-col sm:flex-row gap-5 items-start sm:items-center">
       <img
         src={profile.avatarUrl}
         alt={profile.login}

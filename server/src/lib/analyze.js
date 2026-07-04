@@ -247,5 +247,10 @@ export function runFullAnalysis(user) {
     activityTag,
     repoHealth: repoHealth.slice(0, 5),
     growthTrend,
+    totals: {
+      stars: repos.reduce((sum, r) => sum + r.stargazerCount, 0),
+      forks: repos.reduce((sum, r) => sum + r.forkCount, 0),
+      avgHealth: Math.round(avgHealth),
+    },
   };
 }

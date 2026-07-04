@@ -13,7 +13,7 @@ export default function LanguageChart({ languages }) {
 
   if (data.length === 0) {
     return (
-      <div className="reveal rounded-lg bg-surface border border-border p-6">
+      <div className="reveal card p-6">
         <h3 className="font-heading text-sm font-semibold text-text mb-2">Languages &amp; Skills</h3>
         <p className="text-sm text-text-muted">Not enough public repo data to detect languages.</p>
       </div>
@@ -23,7 +23,7 @@ export default function LanguageChart({ languages }) {
   const dominant = data[0];
 
   return (
-    <div className="reveal rounded-lg bg-surface border border-border p-6">
+    <div className="reveal card p-6">
       <h3 className="font-heading text-sm font-semibold text-text mb-4">Languages &amp; Skills</h3>
 
       <div className="flex items-center gap-6">

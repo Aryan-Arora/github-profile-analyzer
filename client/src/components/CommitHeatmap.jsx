@@ -46,7 +46,7 @@ export default function CommitHeatmap({ calendar, hourBuckets }) {
   const maxHour = Math.max(1, ...hourBuckets);
 
   return (
-    <div className="reveal rounded-lg bg-surface border border-border p-6">
+    <div className="reveal card p-6">
       <div className="flex items-baseline justify-between mb-1">
         <h3 className="font-heading text-sm font-semibold text-text">Contribution Insights</h3>
         <span className="font-data text-xs text-text-muted">

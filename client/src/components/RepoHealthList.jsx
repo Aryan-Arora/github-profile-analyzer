@@ -14,7 +14,7 @@ function pushedLabel(days) {
 
 export default function RepoHealthList({ repos }) {
   return (
-    <div className="reveal rounded-lg bg-surface border border-border p-6">
+    <div className="reveal card p-6">
       <h3 className="font-heading text-sm font-semibold text-text mb-4">Repository Analysis</h3>
       <div className="space-y-3">
         {repos.map((repo) => (
@@ -23,7 +23,7 @@ export default function RepoHealthList({ repos }) {
             href={repo.url}
             target="_blank"
             rel="noreferrer"
-            className="block rounded-md border border-border bg-canvas/40 p-4 hover:border-primary/40 transition-colors group"
+            className="block rounded-lg border border-border bg-canvas/40 p-4 card-hover group"
           >
             <div className="flex items-start justify-between gap-3">
               <span className="font-heading font-semibold text-text group-hover:text-primary transition-colors">

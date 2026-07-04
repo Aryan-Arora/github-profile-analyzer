@@ -1,6 +1,6 @@
 export default function PersonaCard({ personaTag, activityTag, consistency }) {
   return (
-    <div className="reveal rounded-lg bg-surface border border-border border-l-4 border-l-primary p-8">
+    <div className="reveal card border-l-4 border-l-primary p-8">
       <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 text-primary text-[11px] font-data font-medium uppercase tracking-wider px-3 py-1">
         <span className="material-symbols-outlined text-[14px]">auto_awesome</span>
         Developer Persona

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-canvas: #10141a;
+  --color-canvas: #0d1117;
   --color-surface: #161b22;
   --color-surface-high: #1c2229;
   --color-border: #30363d;
@@ -27,6 +27,7 @@ body {
   background-color: var(--color-canvas);
   color: var(--color-text);
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, .font-heading {
@@ -35,6 +36,73 @@ h1, h2, h3, .font-heading {
 
 .font-data {
   font-family: var(--font-mono);
+}
+
+::selection {
+  background: rgba(57, 211, 83, 0.3);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 8px;
+  border: 2px solid #0d1117;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3d444d;
+}
+
+/* Decorative backdrop: faint blueprint grid + green aurora glow */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(240, 246, 252, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 246, 252, 0.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+}
+
+.bg-hero-glow {
+  background:
+    radial-gradient(700px 340px at 50% 0%, rgba(57, 211, 83, 0.09), transparent 70%),
+    radial-gradient(500px 260px at 80% 10%, rgba(88, 166, 255, 0.05), transparent 70%);
+}
+
+.glass {
+  background: rgba(22, 27, 34, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+}
+
+.card-hover {
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  border-color: rgba(57, 211, 83, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.glow-primary {
+  box-shadow: 0 0 24px rgba(57, 211, 83, 0.25);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #39d353, #58a6ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .material-symbols-outlined {
