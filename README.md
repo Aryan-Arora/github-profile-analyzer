@@ -2,7 +2,9 @@
 
 Enter a GitHub username, get back a visual breakdown of their coding identity:
 tech stack fingerprint, commit activity heatmap, repo health scores, growth
-trend, and a rule-based "developer persona" tag.
+trend, and a rule-based "developer persona" tag — or put two profiles
+head-to-head in Compare mode. Ships with an amber-terminal dark theme and a
+light mode, switchable from the header.
 
 ## Stack
 
@@ -45,4 +47,26 @@ only to this app's own server) if the shared server token is rate-limited.
 
 `GET /api/user/:username/analysis` — returns the full aggregated analysis
 (profile, persona tag, language fingerprint, commit heatmap, repo health
-scores, growth trend). Pass the token via the `x-github-token` header.
+scores, growth trend, aggregate totals). An optional `x-github-token`
+header overrides the server-side token for that request.
+
+## Deploying
+
+**Backend (Render / Railway / any Node host)**
+
+- Root directory: `server`
+- Build: `npm install` · Start: `npm start`
+- Environment variables:
+  - `GITHUB_TOKEN` — required (see above)
+  - `CLIENT_ORIGIN` — your deployed frontend URL (CORS allowlist)
+  - `PORT` — usually injected by the host automatically
+
+**Frontend (Vercel / Netlify)**
+
+- Root directory: `client`
+- Build: `npm run build` · Output: `dist`
+- Environment variable: `VITE_API_BASE_URL` — your deployed backend URL
+  (baked in at build time)
+
+Deploy the backend first, then point the frontend's `VITE_API_BASE_URL` at
+it and set the backend's `CLIENT_ORIGIN` to the frontend's URL.
