@@ -7,7 +7,8 @@ function levelFor(count, max) {
   return 1;
 }
 
-const LEVEL_COLORS = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
+// Values resolve from the active theme's --heat-N custom properties
+const LEVEL_COLORS = [0, 1, 2, 3, 4].map((n) => `var(--heat-${n})`);
 
 function chunkIntoWeeks(days) {
   const weeks = [];

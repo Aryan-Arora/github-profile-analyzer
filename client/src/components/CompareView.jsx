@@ -1,5 +1,5 @@
 const LANG_COLORS = [
-  "#58a6ff", "#39d353", "#bb9af7", "#e0af68", "#f7768e",
+  "#e8a020", "#4ab5c4", "#b48ead", "#7fb069", "#e07a5f",
 ];
 
 function ProfileCard({ data, accent }) {

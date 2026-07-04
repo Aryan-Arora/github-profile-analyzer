@@ -19,6 +19,7 @@ const MODES = [
 
 export default function App() {
   const [token, setToken] = useState(() => localStorage.getItem("gh_token") || "");
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
   const [mode, setMode] = useState("single");
   const [data, setData] = useState(null);
   const [compareData, setCompareData] = useState(null);
@@ -29,6 +30,11 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("gh_token", token);
   }, [token]);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("light", theme === "light");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     if ((data || compareData) && resultsRef.current) {
@@ -104,15 +110,26 @@ export default function App() {
             </span>
           </button>
 
-          <a
-            href="https://github.com/Aryan-Arora/github-profile-analyzer"
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-1.5 text-xs text-text-muted hover:text-text transition-colors font-data"
-          >
-            <span className="material-symbols-outlined text-[15px]">code</span>
-            Source
-          </a>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+              title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+              className="w-8 h-8 rounded-full border border-border bg-surface flex items-center justify-center text-text-muted hover:text-primary hover:border-primary/40 transition-colors"
+            >
+              <span className="material-symbols-outlined text-[16px]">
+                {theme === "light" ? "dark_mode" : "light_mode"}
+              </span>
+            </button>
+            <a
+              href="https://github.com/Aryan-Arora/github-profile-analyzer"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1.5 text-xs text-text-muted hover:text-text transition-colors font-data"
+            >
+              <span className="material-symbols-outlined text-[15px]">code</span>
+              Source
+            </a>
+          </div>
         </div>
       </header>
 
@@ -145,7 +162,7 @@ export default function App() {
                 onClick={() => switchMode(m.id)}
                 className={`flex items-center gap-1.5 rounded-full px-5 py-1.5 text-xs font-heading font-semibold transition-colors ${
                   mode === m.id
-                    ? "bg-primary text-[#04260d]"
+                    ? "bg-primary text-canvas"
                     : "text-text-muted hover:text-text"
                 }`}
               >
@@ -191,7 +208,7 @@ export default function App() {
                   <RepoHealthList repos={data.repoHealth} />
                 </div>
                 <CommitHeatmap calendar={data.calendar} hourBuckets={data.heatmap.hourBuckets} />
-                <GrowthTrend growthTrend={data.growthTrend} />
+                <GrowthTrend growthTrend={data.growthTrend} theme={theme} />
               </div>
             )}
             {compareData && <CompareView left={compareData.left} right={compareData.right} />}

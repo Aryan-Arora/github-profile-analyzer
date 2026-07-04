@@ -1,21 +1,71 @@
 @import "tailwindcss";
 
+/* Default theme: amber terminal (dark) */
 @theme {
-  --color-canvas: #0d1117;
-  --color-surface: #161b22;
-  --color-surface-high: #1c2229;
-  --color-border: #30363d;
+  --color-canvas: #171310;
+  --color-surface: #1f1a14;
+  --color-surface-high: #292217;
+  --color-border: #40382a;
 
-  --color-primary: #39d353;
-  --color-primary-dim: #2ea043;
-  --color-secondary: #58a6ff;
+  --color-primary: #ffb224;
+  --color-primary-dim: #e0961a;
+  --color-secondary: #5bc7d8;
 
-  --color-text: #f0f6fc;
-  --color-text-muted: #8b949e;
+  --color-text: #f5efe3;
+  --color-text-muted: #a3988a;
 
   --font-heading: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --grid-line: rgba(245, 239, 227, 0.03);
+  --glass-bg: rgba(31, 26, 20, 0.75);
+  --glow-color: rgba(255, 178, 36, 0.25);
+  --selection: rgba(255, 178, 36, 0.3);
+  --card-shadow: rgba(0, 0, 0, 0.35);
+  --hero-glow-a: rgba(255, 178, 36, 0.09);
+  --hero-glow-b: rgba(91, 199, 216, 0.05);
+  --gradient-from: #ffb224;
+  --gradient-to: #5bc7d8;
+
+  --heat-0: #241e15;
+  --heat-1: #4a3407;
+  --heat-2: #7d5807;
+  --heat-3: #bd860e;
+  --heat-4: #ffb224;
+}
+
+/* Light theme overrides (class applied to <html>) */
+.light {
+  --color-canvas: #faf6ef;
+  --color-surface: #ffffff;
+  --color-surface-high: #f0e9dd;
+  --color-border: #e3daca;
+
+  --color-primary: #d97706;
+  --color-primary-dim: #b45309;
+  --color-secondary: #0e7490;
+
+  --color-text: #201b16;
+  --color-text-muted: #6f6558;
+
+  --grid-line: rgba(32, 27, 22, 0.05);
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glow-color: rgba(217, 119, 6, 0.22);
+  --selection: rgba(217, 119, 6, 0.25);
+  --card-shadow: rgba(31, 26, 20, 0.1);
+  --hero-glow-a: rgba(217, 119, 6, 0.1);
+  --hero-glow-b: rgba(14, 116, 144, 0.06);
+  --gradient-from: #d97706;
+  --gradient-to: #0e7490;
+
+  --heat-0: #efe8db;
+  --heat-1: #fbdca4;
+  --heat-2: #f4b74d;
+  --heat-3: #dd9020;
+  --heat-4: #b36a05;
 }
 
 * {
@@ -28,6 +78,7 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 h1, h2, h3, .font-heading {
@@ -39,7 +90,7 @@ h1, h2, h3, .font-heading {
 }
 
 ::selection {
-  background: rgba(57, 211, 83, 0.3);
+  background: var(--selection);
 }
 
 ::-webkit-scrollbar {
@@ -50,31 +101,28 @@ h1, h2, h3, .font-heading {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #30363d;
+  background: var(--color-border);
   border-radius: 8px;
-  border: 2px solid #0d1117;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3d444d;
+  border: 2px solid var(--color-canvas);
 }
 
-/* Decorative backdrop: faint blueprint grid + green aurora glow */
+/* Decorative backdrop: faint blueprint grid + amber glow */
 .bg-grid {
   background-image:
-    linear-gradient(rgba(240, 246, 252, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(240, 246, 252, 0.025) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 44px 44px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
 }
 
 .bg-hero-glow {
   background:
-    radial-gradient(700px 340px at 50% 0%, rgba(57, 211, 83, 0.09), transparent 70%),
-    radial-gradient(500px 260px at 80% 10%, rgba(88, 166, 255, 0.05), transparent 70%);
+    radial-gradient(700px 340px at 50% 0%, var(--hero-glow-a), transparent 70%),
+    radial-gradient(500px 260px at 80% 10%, var(--hero-glow-b), transparent 70%);
 }
 
 .glass {
-  background: rgba(22, 27, 34, 0.75);
+  background: var(--glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -83,23 +131,24 @@ h1, h2, h3, .font-heading {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 0.75rem;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .card-hover {
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 .card-hover:hover {
-  border-color: rgba(57, 211, 83, 0.35);
+  border-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 30px var(--card-shadow);
 }
 
 .glow-primary {
-  box-shadow: 0 0 24px rgba(57, 211, 83, 0.25);
+  box-shadow: 0 0 24px var(--glow-color);
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, #39d353, #58a6ff);
+  background: linear-gradient(90deg, var(--gradient-from), var(--gradient-to));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

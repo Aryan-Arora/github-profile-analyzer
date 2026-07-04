@@ -39,7 +39,7 @@ export default function CompareBar({ onCompare, loading }) {
         <button
           type="submit"
           disabled={loading || !ready}
-          className="rounded-full bg-primary text-[#04260d] font-heading font-semibold px-8 py-2.5 text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-primary-dim transition-colors glow-primary"
+          className="rounded-full bg-primary text-canvas font-heading font-semibold px-8 py-2.5 text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-primary-dim transition-colors glow-primary"
         >
           {loading ? "Comparing…" : "Compare Profiles"}
         </button>

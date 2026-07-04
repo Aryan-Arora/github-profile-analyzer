@@ -1,8 +1,8 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 const PALETTE = [
-  "#58a6ff", "#39d353", "#bb9af7", "#e0af68", "#f7768e",
-  "#7dcfff", "#ff9e64", "#9ece6a", "#c3e88d", "#89ddff",
+  "#e8a020", "#4ab5c4", "#b48ead", "#7fb069", "#e07a5f",
+  "#5e81ac", "#d08770", "#a3be8c", "#ebcb8b", "#88c0d0",
 ];
 
 export default function LanguageChart({ languages }) {

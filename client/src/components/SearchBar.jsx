@@ -30,7 +30,7 @@ export default function SearchBar({ onSearch, loading, token, onTokenChange }) {
         <button
           type="submit"
           disabled={loading}
-          className="rounded-full bg-primary text-[#04260d] font-heading font-semibold px-5 py-2 text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-primary-dim transition-colors"
+          className="rounded-full bg-primary text-canvas font-heading font-semibold px-5 py-2 text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-primary-dim transition-colors"
         >
           {loading ? "Analyzing…" : "Analyze"}
         </button>
